@@ -7,7 +7,7 @@ export default function LayoutShell({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="bg-[#F5F5F5]">
       <Navbar />
       {/* Navbar height padding top */}
       <div className="pt-27 px-44.25">{children}</div>
