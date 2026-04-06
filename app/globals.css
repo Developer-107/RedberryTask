@@ -1,10 +1,8 @@
 @import "tailwindcss";
-@import "react-quill-new/dist/quill.snow.css";
-@import "react-datepicker/dist/react-datepicker.css";
 
 
 :root {
-  --background: #ffffff;
+  --background: #F5F5F5;
   --foreground: #171717;
 }
 
