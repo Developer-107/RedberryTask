@@ -11,7 +11,7 @@ export default function Navbar() {
   const { data: session, status } = useSession();
 
   return (
-    <nav className="flex w-full justify-between h-27 items-center py-6 px-44.25 border-b border-b-gray-200">
+    <nav className="fixed top-0 left-0 z-50 flex w-full justify-between h-27 items-center py-6 px-44.25 border-b border-b-gray-200">
       <Logo contentSize={30} />
 
       <div className="flex items-center gap-5 ">
