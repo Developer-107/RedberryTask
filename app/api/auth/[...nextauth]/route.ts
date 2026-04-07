@@ -16,25 +16,26 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
-          const res = await api.post(
-            "/login",
-            {
-              email: credentials.email,
-              password: credentials.password,
-            },
-          );
+          const res = await api.post("/login", {
+            email: credentials.email,
+            password: credentials.password,
+          });
 
           const { user, token } = res.data.data;
 
           return {
-            id: user.id,
+            id: String(user.id),
             email: user.email,
             name: user.username,
             image: user.avatar,
             accessToken: token,
           } as any;
         } catch (err: any) {
-          throw new Error(err.response?.data?.message || "INVALID_CREDENTIALS");
+          if (err.response?.status === 401) {
+            throw new Error("Invalid credentials");
+          }
+
+          throw new Error(err.response?.data?.message || "Server error");
         }
       },
     }),

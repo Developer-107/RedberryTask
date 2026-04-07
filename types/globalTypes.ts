@@ -24,3 +24,34 @@ export interface Course {
     avatar: string;
   };
 }
+
+export interface CourseInProgress {
+  id: number;
+  quantity: number;
+  totalPrice: number;
+  progress: number;
+  completedAt: Date;
+  course: Course;
+  schedule: {
+    weeklySchedule: {
+      id: number;
+      label: string;
+      days: [string, string];
+    };
+    timeSlot: {
+      id: number;
+      label: string;
+      startTime: string;
+      endTime: string;
+    };
+    sessionType: {
+      id: number;
+      courseScheduleId: number;
+      name: string;
+      priceModifier: number;
+      availableSeats: number;
+      location: string;
+    };
+    location: string;
+  };
+}

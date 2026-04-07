@@ -1,19 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Course } from "@/types/globalTypes";
+import { CourseInProgress } from "@/types/globalTypes";
 
-interface CourseProps {
-  course: Course;
+interface CourseInProgressProps {
+  courseInProgress: CourseInProgress;
 }
 
-export default function CourseCard({ course }: CourseProps) {
+export default function CardInContinueLearning({ courseInProgress }: CourseInProgressProps) {
   return (
     <div className="w-full min-w-45 border border-gray-100 bg-white rounded-lg">
       <div className="flex flex-col gap-3 p-5 h-full">
         <div className="flex min-h-65.5 w-full rounded-lg relative overflow-hidden">
           <Image
-            src={course?.image || ""}
-            alt={course?.title}
+            src={courseInProgress?.course?.image || ""}
+            alt={courseInProgress?.course?.title}
             fill
             className="object-cover auto"
           />
@@ -22,12 +22,12 @@ export default function CourseCard({ course }: CourseProps) {
           <div className="flex gap-1 items-center justify-between text-sm font-medium">
             <p className=" text-gray-700 font-normal text-xs">
               <span className="text-gray-500">Lecturer</span>{" "}
-              {course?.instructor?.name?.length < 50
-                ? course?.instructor?.name
-                : course?.instructor?.name.slice(0, 47) + "..."}
+              {courseInProgress?.instructor?.name?.length < 50
+                ? courseInProgress?.instructor?.name
+                : courseInProgress?.instructor?.name.slice(0, 47) + "..."}
             </p>
 
-            {course?.avgRating && (
+            {courseInProgress?.avgRating && (
               <p className="flex gap-1 items-center text-gray-600">
                 <svg
                   width="15"
@@ -43,30 +43,30 @@ export default function CourseCard({ course }: CourseProps) {
                     fill="#F4A316"
                   />
                 </svg>
-                {course.avgRating}
+                {courseInProgress.avgRating}
               </p>
             )}
           </div>
 
           <p className="mt-1 font-semibold text-gray-900 text-[24px]">
-            {course?.title.length < 57
-              ? course.title
-              : course.title.slice(0, 54) + "..."}
+            {courseInProgress?.title.length < 57
+              ? courseInProgress.title
+              : courseInProgress.title.slice(0, 54) + "..."}
           </p>
           <p className=" text-gray-500 mt-3 mb-4">
-            {course?.description && course?.description.length > 200
-              ? course.description.slice(0, 197) + "..."
-              : course.description}
+            {courseInProgress?.description && courseInProgress?.description.length > 200
+              ? courseInProgress.description.slice(0, 197) + "..."
+              : courseInProgress.description}
           </p>
           <div className="flex justify-between items-center text-gray-400 font-normal mt-auto">
             <div className="flex items-center gap-2 text-xs">
               Starting from
               <span className="font-semibold text-gray-900 text-[32px]">
-                ${Math.floor(Number(course?.basePrice))}
+                ${Math.floor(Number(courseInProgress?.basePrice))}
               </span>
             </div>
             <Link
-              href={`/course/${course.id}`}
+              href={`/courseInProgress/${courseInProgress.id}`}
               className="px-4 py-3 hover:opacity-80 bg-[#4F46E5] text-white rounded-lg"
             >
               Details
