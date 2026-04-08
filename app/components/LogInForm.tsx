@@ -24,25 +24,13 @@ export default function LogInForm({ setLoginOpen, setSignUpOpen }: Props) {
     });
 
     if (result?.error) {
-      switch (result.error) {
-        case "INVALID_INPUT":
-          setError("Please provide both email and password.");
-          break;
-        case "INVALID_CREDENTIALS":
-          setError("Invalid email or password.");
-          break;
-        case "TOO_MANY_ATTEMPTS":
-          setError("Too many failed attempts. Please try again later.");
-          break;
-        case "EMAIL_NOT_VERIFIED":
-          setError(
-            "Email is not verified. Please finish verification process.",
-          );
-          break;
-        default:
-          setError("An unexpected error occurred. Please try again.");
-      }
-    } else {
+
+        result?.status === 401 ? 
+        setError("Credentials are not right. Please try again.") 
+        :
+        setError("Something went wrong. Please try again.")
+       
+     } else {
       setError(null);
       setLoginOpen(false);
     }

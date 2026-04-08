@@ -55,3 +55,14 @@ export interface CourseInProgress {
     location: string;
   };
 }
+
+export interface User {
+    id: number,
+    username: string,
+    email: string,
+    avatar: string,
+    fullName: string,
+    mobileNumber: string,
+    age: number,
+    profileComplete: boolean
+}

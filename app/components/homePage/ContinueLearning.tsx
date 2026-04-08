@@ -17,7 +17,6 @@ export default function ContinueLearning() {
         setLoading(true);
         const res = await api.get("/courses/in-progress");
         setCoursesInProgress(res.data.data);
-        console.log(res.data.data)
 
       } catch (err) {
         console.error("CourseInProgress can't be fetched " + err);

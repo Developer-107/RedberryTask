@@ -3,6 +3,7 @@ import { useState } from "react";
 import { AvatarDropZone } from "./AvatarDropZone";
 import { api } from "@/lib/api";
 import { signIn } from "next-auth/react";
+import ThreeMovingDots from "./ThreeMovingDots";
 
 interface Props {
   setLoginOpen: (value: boolean) => void;
@@ -30,6 +31,42 @@ export default function SignUpForm({ setLoginOpen, setSignUpOpen }: Props) {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    if (!email.trim()) {
+      return "Email is required";
+    }
+
+    if (!password.trim()) {
+      return "Password is required";
+    }
+
+    if (!repeatedPassword.trim()) {
+      return "You should confirm password";
+    }
+
+    if (!username.trim()) {
+      return "Username is required";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      return "Please enter a valid email address";
+    }
+
+    if (email.trim().length < 3) {
+      return "Email should be at least 3 characters";
+    }
+
+    if (password.trim().length < 3) {
+      return "Password should be at least 3 characters";
+    }
+
+    if (password !== repeatedPassword) {
+      setError("Passwords do not match");
+      setLoading(false);
+      return;
+    }
 
     if (password !== repeatedPassword) {
       setError("Passwords do not match");
@@ -164,16 +201,14 @@ export default function SignUpForm({ setLoginOpen, setSignUpOpen }: Props) {
                 </p>
                 <div className="relative w-full">
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={"password"}
                     placeholder="••••••••"
                     className="px-4 py-3 w-full h-10 rounded-lg border-[1.5px] border-gray-200! text-sm"
                     value={repeatedPassword}
                     onChange={(e) => setRepeatedPassword(e.target.value)}
                     required
                   />
-                  <div
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-sm pr-1"
-                  >
+                  <div className="absolute right-2 top-1/2 -translate-y-1/2 text-sm pr-1">
                     <svg
                       width="20"
                       height="8"
@@ -234,8 +269,9 @@ export default function SignUpForm({ setLoginOpen, setSignUpOpen }: Props) {
               <button
                 type="submit"
                 className="flex mt-3 w-full h-10 text-[16px] rounded-lg bg-[#4F46E5] text-white py-6 justify-center items-center hover:opacity-80 transition cursor-pointer"
+                disabled={loading}
               >
-                Sign Up
+                {loading ? <ThreeMovingDots /> : "Sign Up" }
               </button>
             )}
           </form>

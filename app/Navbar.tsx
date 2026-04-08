@@ -5,15 +5,44 @@ import { useSession } from "next-auth/react";
 import BrowseCourse from "./components/navbar/BrowseCourse";
 import NavbarSkeleton from "./components/navbar/NavbarSkeleton";
 import EnrolledCourses from "./components/navbar/EnrolledCourses";
-import AccountCircle from "./components/navbar/AccountCircle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogInForm from "./components/LogInForm";
 import SignUpForm from "./components/SignUpForm";
+import ProfileWindow from "./components/ProfileWindow";
+import Avatar from "./components/Avatar";
+import { api } from "@/lib/api";
+import { User } from "@/types/globalTypes";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
   const [loginOpen, setLoginOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User>();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (!(session as any)?.accessToken) return;
+
+      try {
+        setLoading(true);
+
+        const res = await api.get("/me", {
+          headers: {
+            Authorization: `Bearer ${(session as any).accessToken}`,
+          },
+        });
+
+        setUser(res.data.data ?? {});
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
+  }, [session]);
 
   return (
     <nav className="fixed top-0 left-0 z-50 bg-[#F5F5F5] flex w-full justify-between h-27 items-center py-6 px-44.25 border-b border-b-gray-200">
@@ -22,12 +51,22 @@ export default function Navbar() {
       <div className="flex items-center gap-5 ">
         <BrowseCourse />
 
-        {status === "loading" ? (
+        {status === "loading" || loading ? (
           <NavbarSkeleton />
         ) : session ? (
           <div className="flex gap-7">
             <EnrolledCourses />
-            <AccountCircle />
+            <div
+              onClick={() => {
+                setProfileOpen(true);
+              }}
+              className="rounded-full border border-gray-100 hover:border-[#B7B3F4] cursor-pointer"
+            >
+              <Avatar
+                avatarImg={user?.avatar}
+                isProfileComplete={user?.profileComplete}
+              />
+            </div>
           </div>
         ) : (
           <div className="flex ml-2 gap-2">
@@ -61,6 +100,11 @@ export default function Navbar() {
       {/* Sign Up */}
       {signUpOpen && (
         <SignUpForm setSignUpOpen={setSignUpOpen} setLoginOpen={setLoginOpen} />
+      )}
+
+      {/* Profile */}
+      {profileOpen && (
+        <ProfileWindow setProfileOpen={setProfileOpen} user={user} />
       )}
     </nav>
   );
