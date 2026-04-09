@@ -271,7 +271,7 @@ export default function SignUpForm({ setLoginOpen, setSignUpOpen }: Props) {
                 className="flex mt-3 w-full h-10 text-[16px] rounded-lg bg-[#4F46E5] text-white py-6 justify-center items-center hover:opacity-80 transition cursor-pointer"
                 disabled={loading}
               >
-                {loading ? <ThreeMovingDots /> : "Sign Up" }
+                {loading ? <ThreeMovingDots /> : "Sign Up"}
               </button>
             )}
           </form>

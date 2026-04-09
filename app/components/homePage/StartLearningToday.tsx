@@ -26,7 +26,7 @@ export default function StartLearningToday() {
   }, []);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mb-16">
       <h2 className="font-semibold text-[40px]">Start Learning Today</h2>
       <p className="text-[18px]">
         Choose from our most popular courses and begin your journey

@@ -5,7 +5,8 @@ import AuthProvider from "./auth/Provider";
 import "@radix-ui/themes/styles.css";
 import { Container, Theme } from "@radix-ui/themes";
 import LayoutShell from "./layoutShell";
-
+import { LoginModalProvider } from "@/context/LoginModalContext";
+import { EnrolledCoursesProvider } from "@/context/EnrolledCoursesContext";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -13,32 +14,31 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-
 export const metadata: Metadata = {
   title: {
     default: "Bootcamp",
     template: "%s | Bootcamp",
   },
-}
+};
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
     <html lang="en">
       <body className={`${montserrat.variable} antialiased `}>
         <Container>
-        <AuthProvider>
-        <Theme>
-        <LayoutShell>
-        {children}
-        </LayoutShell>
-        </Theme>
-        </AuthProvider>
+          <AuthProvider>
+            <LoginModalProvider>
+              <EnrolledCoursesProvider>
+                <Theme>
+                  <LayoutShell>{children}</LayoutShell>
+                </Theme>
+              </EnrolledCoursesProvider>
+            </LoginModalProvider>
+          </AuthProvider>
         </Container>
       </body>
     </html>

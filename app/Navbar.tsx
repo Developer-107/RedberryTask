@@ -12,10 +12,17 @@ import ProfileWindow from "./components/ProfileWindow";
 import Avatar from "./components/Avatar";
 import { api } from "@/lib/api";
 import { User } from "@/types/globalTypes";
+import { useLogin } from "@/context/LoginModalContext";
+import EnrolledCoursesWindow from "./components/navbar/EnrolledCoursesWindow";
+import { useEnrolledCourses } from "@/context/EnrolledCoursesContext";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
-  const [loginOpen, setLoginOpen] = useState(false);
+
+  const { isLoginOpen, setLoginOpen } = useLogin();
+  const { isEnrolledCoursesOpen, setEnrolledCoursesOpen } =
+    useEnrolledCourses();
+
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -51,11 +58,16 @@ export default function Navbar() {
       <div className="flex items-center gap-5 ">
         <BrowseCourse />
 
-        {status === "loading" || loading ? (
+        {status === "loading" && loading ? (
           <NavbarSkeleton />
         ) : session ? (
-          <div className="flex gap-7">
-            <EnrolledCourses />
+          <div className="flex gap-7 items-center">
+            <div
+              className="h-full"
+              onClick={() => setEnrolledCoursesOpen(true)}
+            >
+              <EnrolledCourses />
+            </div>
             <div
               onClick={() => {
                 setProfileOpen(true);
@@ -93,7 +105,7 @@ export default function Navbar() {
       </div>
 
       {/* Login */}
-      {loginOpen && (
+      {isLoginOpen && (
         <LogInForm setSignUpOpen={setSignUpOpen} setLoginOpen={setLoginOpen} />
       )}
 
@@ -106,6 +118,9 @@ export default function Navbar() {
       {profileOpen && (
         <ProfileWindow setProfileOpen={setProfileOpen} user={user} />
       )}
+
+      {/* Enrolled Courses Window */}
+      {isEnrolledCoursesOpen && <EnrolledCoursesWindow user={user} />}
     </nav>
   );
 }

@@ -1,5 +1,5 @@
 import Carousel from "./components/homePage/Carousel";
-import StartLearningToday from "./components/homePage/StartLearningToday";
+import LearningsWrapper from "./components/homePage/LearningsWrapper";
 
 
 export default async function Home() {
@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <div className="">
      <Carousel />
-     <StartLearningToday />
+     <LearningsWrapper />
     </div>
     
   );

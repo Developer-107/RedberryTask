@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import Avatar from "./Avatar";
 import { User } from "@/types/globalTypes";
 import ThreeMovingDots from "./ThreeMovingDots";
+import { useRouter } from "next/navigation";
 
 interface Props {
   setProfileOpen: (value: boolean) => void;
@@ -15,11 +16,13 @@ interface Props {
 export default function ProfileWindow({ setProfileOpen, user }: Props) {
   const { data: session, status } = useSession();
 
+  const router = useRouter();
+
   const [userName, setUserName] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [age, setAge] = useState<number>();
+  const [age, setAge] = useState<number | "">("");
   const [isProfileComplete, setIsProfileComplete] = useState<
     Boolean | undefined
   >();
@@ -138,6 +141,7 @@ export default function ProfileWindow({ setProfileOpen, user }: Props) {
       const { user } = res.data.data;
 
       console.log("Updated:", user);
+      router.push("/")
       setProfileOpen(false);
     } catch (err: any) {
       if (err.response) {
