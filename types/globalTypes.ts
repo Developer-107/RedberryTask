@@ -57,12 +57,44 @@ export interface CourseInProgress {
 }
 
 export interface User {
-    id: number,
-    username: string,
-    email: string,
-    avatar: string,
-    fullName: string,
-    mobileNumber: string,
-    age: number,
-    profileComplete: boolean
+  id: number;
+  username: string;
+  email: string;
+  avatar: string;
+  fullName: string;
+  mobileNumber: string;
+  age: number;
+  profileComplete: boolean;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+  icon: string;
+}
+
+export interface Topic {
+  id: number;
+  categoryId: number;
+  name: string;
+}
+
+export interface Instructor {
+  id: number;
+  name: string;
+  avatar: string;
+}
+
+export interface MetaData {
+    currentPage: number,
+    lastPage: number,
+    perPage: number,
+    total: number
+  }
+
+export type Filters = {
+  categories: number[];
+  topics: number[];
+  instructors: number[];
+};
+

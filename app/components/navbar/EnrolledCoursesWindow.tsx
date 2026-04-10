@@ -15,7 +15,8 @@ interface Props {
 }
 
 export default function EnrolledCoursesWindow({ user }: Props) {
-  const { isEnrolledCoursesOpen, setEnrolledCoursesOpen } = useEnrolledCourses();
+  const { isEnrolledCoursesOpen, setEnrolledCoursesOpen } =
+    useEnrolledCourses();
 
   const { data: session, status } = useSession();
 
@@ -48,11 +49,13 @@ export default function EnrolledCoursesWindow({ user }: Props) {
   }, [session]);
 
   return (
-    <div
-      onMouseDown={() => setEnrolledCoursesOpen(false)}
-      className="fixed inset-0 flex h-screen items-center justify-center z-70 bg-[#000000]/25"
-    >
-      <div className=" px-14.25 pt-10.5 bg-[#F5F5F5] ml-auto h-screen w-198.5 ">
+    <div className="fixed inset-0 flex h-screen items-center justify-center z-70 bg-[#000000]/25">
+      <div
+        onClick={() => setEnrolledCoursesOpen(false)}
+        className="w-full h-full"
+      />
+
+      <div className=" px-14.25 pt-10.5 bg-[#F5F5F5] ml-auto h-screen min-w-198.5 ">
         <div className="flex items-center justify-between text-gray-950">
           <h1 className=" font-medium text-[40px]"> Enrolled Courses </h1>
           <p>Total Enrollments {coursesInProgress?.length || 0}</p>

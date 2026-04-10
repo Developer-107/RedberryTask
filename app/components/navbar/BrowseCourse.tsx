@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function BrowseCourse() {
   return (
-    <Link href={""} className="flex items-center gap-1 hover:text-[#4F46E5]">
+    <Link href={"/courses"} className="flex items-center gap-1 hover:text-[#4F46E5]">
       <svg
         width="26"
         height="26"
