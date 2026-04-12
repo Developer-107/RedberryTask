@@ -46,6 +46,9 @@ export default function ProfileWindow({ setProfileOpen, user }: Props) {
       setAge(user?.age ?? "");
       setPhoneNumber(user?.mobileNumber ?? "");
       setAvatarImg(user?.avatar);
+      if (user?.avatar) {
+        setAvatarImgFiles([{ url: user.avatar }]);
+      }
       setIsProfileComplete(user?.profileComplete);
     } catch (err) {
       console.log(err);

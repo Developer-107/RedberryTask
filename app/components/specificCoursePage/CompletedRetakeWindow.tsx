@@ -12,63 +12,57 @@ interface Props {
   session?: Session;
 }
 
-export default function CompletedRetakeWindow({ courseInProgress, session }: Props) {
+export default function CompletedRetakeWindow({
+  courseInProgress,
+  session,
+}: Props) {
   const [rateWindowOpen, setRateWindowOpen] = useState(true);
   const [conflictWindowOpen, setConflictWindowOpen] = useState(false);
-  const [successfullyEnrolledWindowOpen, setSuccessfullyEnrolledWindowOpen] = useState(false)
-  const [seatsNotAvailableWindowOpen, setSeatsNotAvailableWindowOpen] = useState(false)
+  const [successfullyEnrolledWindowOpen, setSuccessfullyEnrolledWindowOpen] =
+    useState(false);
+  const [seatsNotAvailableWindowOpen, setSeatsNotAvailableWindowOpen] =
+    useState(false);
   const [conflictData, setConflictData] = useState<conflictData>();
 
+  const retakeCourse = async () => {
+    try {
+      if (!courseInProgress || !session) return;
 
-   const retakeCourse = async () => {
-  try {
-    if (!courseInProgress || !session) return;
-
-
-    await api.post(
-      `/enrollments`,
-      {
-        courseId: courseInProgress.id,
-        courseScheduleId:
-        courseInProgress.enrollment?.schedule?.sessionType?.id,
-        force: false,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${(session as any).accessToken}`,
+      await api.post(
+        `/enrollments`,
+        {
+          courseId: courseInProgress.id,
+          courseScheduleId:
+            courseInProgress.enrollment?.schedule?.sessionType?.id,
+          force: false,
         },
+        {
+          headers: {
+            Authorization: `Bearer ${(session as any).accessToken}`,
+          },
+        },
+      );
+
+      setSuccessfullyEnrolledWindowOpen(true);
+    } catch (err: any) {
+      if (err.response?.status === 409) {
+        if (
+          err.response.data.message === "No seats available for this schedule."
+        ) {
+          setSeatsNotAvailableWindowOpen(true);
+        } else {
+          const conflicts = err.response.data.conflicts;
+
+          console.log(conflicts);
+
+          setConflictData(conflicts);
+          setConflictWindowOpen(true);
+        }
+      } else {
+        console.log(err);
       }
-    );
-
-
-    setSuccessfullyEnrolledWindowOpen(true)
-  } catch (err: any) {
-    if (err.response?.status === 409) {
-       if (err.response.data.message === "No seats available for this schedule.")  { 
-        
-        setSeatsNotAvailableWindowOpen(true) 
-
-       } else {
-
-
-       const conflicts =  err.response.data.conflicts
-
-      
-
-      console.log(conflicts);
-
-      setConflictData(conflicts);
-      setConflictWindowOpen(true);
-       }
-    } else {
-      console.log(err);
     }
-  }
-};
-  
-
-
-
+  };
 
   return (
     <div className=" flex flex-col gap-5.5 w-118.25">
@@ -175,7 +169,10 @@ export default function CompletedRetakeWindow({ courseInProgress, session }: Pro
           </div>
         </div>
 
-        <button onClick={retakeCourse} className="flex items-center justify-around p-4.25 rounded-lg bg-[#4F46E5] text-white hover:opacity-80 cursor-pointer">
+        <button
+          onClick={retakeCourse}
+          className="flex items-center justify-around p-4.25 rounded-lg bg-[#4F46E5] text-white hover:opacity-80 cursor-pointer"
+        >
           <div className="flex gap-2.5 items-center">
             Retake Course
             <svg
@@ -194,7 +191,7 @@ export default function CompletedRetakeWindow({ courseInProgress, session }: Pro
         </button>
       </div>
 
-      {rateWindowOpen &&
+      {rateWindowOpen && (
         <div className="w-full flex flex-col p-2.5 bg-white gap-2 mt-4.25 items-center justify-center rounded-lg">
           <svg
             onClick={() => {
@@ -215,35 +212,47 @@ export default function CompletedRetakeWindow({ courseInProgress, session }: Pro
             />
           </svg>
           <div className="flex flex-col gap-4.5 justify-center items-center mt-3 mb-10">
-            <p className="text-gray-600"> {!courseInProgress?.isRated ? "Rate your Experience" : "You've already rated this course"}</p>
-          
-            {!courseInProgress?.isRated && <RatingStars courseId={courseInProgress?.id} />}
-            
+            <p className="text-gray-600">
+              {" "}
+              {!courseInProgress?.isRated
+                ? "Rate your Experience"
+                : "You've already rated this course"}
+            </p>
+
+            {!courseInProgress?.isRated && (
+              <RatingStars courseId={courseInProgress?.id} />
+            )}
           </div>
         </div>
-      }
+      )}
 
       {/* Conflict Modal */}
-      {conflictWindowOpen && 
-      <ConflictEnrollingWindow 
-        conflictedCourseTimeSchedule={conflictData?.schedule} 
-        conflictedCourseTitle={conflictData?.conflictingCourseName}
-        conflictedWindowOpen={setConflictWindowOpen}
-        successfullyEnrolledWindowOpen={setSuccessfullyEnrolledWindowOpen}
-        session={session}
-        courseInProgress={courseInProgress}
-         />}
+      {conflictWindowOpen && (
+        <ConflictEnrollingWindow
+          conflictedCourseTimeSchedule={conflictData?.schedule}
+          conflictedCourseTitle={conflictData?.conflictingCourseName}
+          conflictedWindowOpen={setConflictWindowOpen}
+          successfullyEnrolledWindowOpen={setSuccessfullyEnrolledWindowOpen}
+          session={session}
+          courseInProgress={courseInProgress}
+        />
+      )}
 
       {/* Successfully Enrolled Modal */}
-      {successfullyEnrolledWindowOpen && <EnrollmentConfirm  courseTitle={courseInProgress?.title} courseId={courseInProgress?.id}/>}
+      {successfullyEnrolledWindowOpen && (
+        <EnrollmentConfirm
+          courseTitle={courseInProgress?.title}
+          courseId={courseInProgress?.id}
+        />
+      )}
 
       {/* No Seats Modal */}
-      {seatsNotAvailableWindowOpen && <SeatsNotAvailable 
-                                            seatsNotAvailableWindowOpen={setSeatsNotAvailableWindowOpen} 
-                                            courseTitle={courseInProgress?.title} />}
-
+      {seatsNotAvailableWindowOpen && (
+        <SeatsNotAvailable
+          seatsNotAvailableWindowOpen={setSeatsNotAvailableWindowOpen}
+          courseTitle={courseInProgress?.title}
+        />
+      )}
     </div>
-
-
   );
 }

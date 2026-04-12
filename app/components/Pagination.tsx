@@ -52,7 +52,7 @@ export default function Pagination({
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page === 1}
-          className="flex items-center justify-center gap-1 border p-1 rounded-lg cursor-pointer text-[#4F46E5] hover:bg-[#4F46E5] hover:text-white disabled:text-gray-200 disabled:hover:bg-white disabled:cursor-not-allowed bg-white h-10 w-10"
+          className="flex items-center justify-center gap-1 border p-1 rounded-lg cursor-pointer text-[#4F46E5] hover:border-[#DDDBFA] hover:bg-[#DDDBFA]  disabled:text-gray-200 disabled:hover:bg-white disabled:cursor-not-allowed bg-white h-10 w-10"
         >
           <ArrowLeftIcon size={14} />
         </button>
@@ -67,11 +67,11 @@ export default function Pagination({
             <button
               key={i}
               onClick={() => onPageChange(Number(p))}
-              className={`px-4 py-2 rounded-lg border cursor-pointer h-10 w-10
+              className={`px-4 py-2 rounded-lg border cursor-pointer h-10 w-10 hover:border-[#DDDBFA] hover:bg-[#DDDBFA]
               ${
                 page === p
                   ? "bg-[#4F46E5] text-white"
-                  : "text-[#4F46E5] hover:bg-[#4F46E5] hover:text-white"
+                  : "text-[#4F46E5] hover:bg-[#4F46E5] "
               }`}
             >
               {p}
@@ -83,7 +83,7 @@ export default function Pagination({
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page === totalPages}
-          className="flex items-center justify-center gap-1 border p-1 rounded-lg cursor-pointer text-[#4F46E5] hover:bg-[#4F46E5] hover:text-white disabled:text-gray-200 disabled:hover:bg-white disabled:cursor-not-allowed bg-white h-10 w-10"
+          className="flex items-center justify-center gap-1 border p-1 rounded-lg cursor-pointer text-[#4F46E5] hover:border-[#DDDBFA] hover:bg-[#DDDBFA]  disabled:text-gray-200 disabled:hover:bg-white disabled:cursor-not-allowed bg-white h-10 w-10"
         >
           <ArrowRightIcon size={14} />
         </button>

@@ -24,13 +24,10 @@ export default function LogInForm({ setLoginOpen, setSignUpOpen }: Props) {
     });
 
     if (result?.error) {
-
-        result?.status === 401 ? 
-        setError("Credentials are not right. Please try again.") 
-        :
-        setError("Something went wrong. Please try again.")
-       
-     } else {
+      result?.status === 401
+        ? setError("Credentials are not right. Please try again.")
+        : setError("Something went wrong. Please try again.");
+    } else {
       setError(null);
       setLoginOpen(false);
     }
@@ -103,12 +100,20 @@ export default function LogInForm({ setLoginOpen, setSignUpOpen }: Props) {
             </button>
           </form>
           <div className="flex w-full items-center justify-center gap-2 my-4">
-            <div className="bg-gray-200 h-px w-full"/>
+            <div className="bg-gray-200 h-px w-full" />
             <p className="text-gray-500">or</p>
-            <div className="bg-gray-200 h-px w-full"/>
+            <div className="bg-gray-200 h-px w-full" />
           </div>
           <div className="flex gap-2 items-center text-xs text-gray-400">
-            Don't u have an account? <span className="underline text-sm font-medium text-gray-900 hover:opacity-80 cursor-pointer" onClick={() => {setLoginOpen(false), setSignUpOpen(true)}}>Sign Up</span>
+            Don't u have an account?{" "}
+            <span
+              className="underline text-sm font-medium text-gray-900 hover:opacity-80 cursor-pointer"
+              onClick={() => {
+                (setLoginOpen(false), setSignUpOpen(true));
+              }}
+            >
+              Sign Up
+            </span>
           </div>
         </div>
       </div>

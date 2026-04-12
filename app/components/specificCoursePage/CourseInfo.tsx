@@ -7,11 +7,14 @@ interface Props {
 
 export default function courseInfo( { course } : Props ) {
 
-      const avgRating = course?.reviews
-    ? course?.reviews
+    const avgRating = course?.reviews?.length
+  ? Math.round(
+      (course.reviews
         .map((r) => r.rating)
-        .reduce((acc, curr) => acc + curr, 0) / course?.reviews?.length
-    : "";
+        .reduce((acc, curr) => acc + curr, 0) /
+        course.reviews.length) * 10
+    ) / 10
+  : "";
 
   return (
     <div className="flex flex-col col-span-3 gap-6">
