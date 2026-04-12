@@ -2,7 +2,7 @@ import Image from "next/image";
 
 interface AvatarProps {
     avatarImg? : string;
-    isProfileComplete? : Boolean | undefined;
+    isProfileComplete? : boolean | undefined;
 
 }
 

@@ -109,12 +109,12 @@ export default function CardInEnrolledCourses({
 
                 <p>
                   {courseInProgress?.schedule?.sessionType?.name &&
-                  courseInProgress?.schedule?.sessionType?.name === "in_person"
+                  (courseInProgress?.schedule?.sessionType?.name === "in_person"
                     ? "In Person"
                     : courseInProgress?.schedule?.sessionType?.name
                         ?.slice(0, 1)
                         .toUpperCase() +
-                      courseInProgress?.schedule?.sessionType?.name?.slice(1)}
+                      courseInProgress?.schedule?.sessionType?.name?.slice(1))}
                 </p>
               </div>
 

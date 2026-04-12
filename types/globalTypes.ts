@@ -1,3 +1,5 @@
+import { DateTime } from "next-auth/providers/kakao";
+
 export interface Course {
   id: number;
   title: string;
@@ -86,15 +88,107 @@ export interface Instructor {
 }
 
 export interface MetaData {
-    currentPage: number,
-    lastPage: number,
-    perPage: number,
-    total: number
-  }
+  currentPage: number;
+  lastPage: number;
+  perPage: number;
+  total: number;
+}
+
+export interface CourseById {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  basePrice: number;
+  durationWeeks: number;
+  hours:string;
+  isFeatured: boolean;
+  reviews: [
+    {
+      userId: number;
+      rating: number;
+    },
+  ];
+  isRated: boolean;
+  category: {
+    id: number;
+    name: string;
+    icon: string;
+  };
+  topic: {
+    id: number;
+    name: string;
+    categoryId: number;
+  };
+  instructor: {
+    id: number;
+    name: string;
+    avatar: string;
+  };
+  enrollment: {
+    id: number;
+    quantity: number;
+    totalPrice: number;
+    progress: number;
+    completedAt: DateTime;
+    course: {
+      id: number;
+      title: string;
+      description: string;
+      image: string;
+      basePrice: number;
+      durationWeeks: number;
+      isFeatured: boolean;
+      avgRating: number;
+      reviewCount: number;
+      category: {
+        id: number;
+        name: string;
+        icon: string;
+      };
+      topic: {
+        id: number;
+        name: string;
+        categoryId: number;
+      };
+      instructor: {
+        id: number;
+        name: string;
+        avatar: string;
+      };
+    };
+    schedule: {
+      weeklySchedule: {
+        id: number;
+        label: string;
+        days: [string, string];
+      };
+      timeSlot: {
+        id: number;
+        label: string;
+        startTime: string;
+        endTime: string;
+      };
+      sessionType: {
+        id: number;
+        courseScheduleId: number;
+        name: string;
+        priceModifier: number;
+        availableSeats: number;
+        location: string;
+      };
+      location: string;
+    };
+  };
+}
+
+export interface conflictData{
+  schedule?: string;
+  conflictingCourseName: string;
+}
 
 export type Filters = {
   categories: number[];
   topics: number[];
   instructors: number[];
 };
-

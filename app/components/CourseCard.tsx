@@ -66,7 +66,7 @@ export default function CourseCard({ course }: CourseProps) {
               </span>
             </div>
             <Link
-              href={`/course/${course.id}`}
+              href={`/courses/${course.id}`}
               className="px-4 py-3 hover:opacity-80 bg-[#4F46E5] text-white rounded-lg"
             >
               Details

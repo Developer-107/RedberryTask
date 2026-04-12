@@ -5,7 +5,7 @@ import CourseCardSkeletonInCourses from "./CourseCardSkeletonInCourses";
 
 interface Props {
   courses?: Course[];
-  loadingState: Boolean;
+  loadingState: boolean;
 }
 
 export default function BrowsedCourses({ courses, loadingState }: Props) {
