@@ -8,7 +8,7 @@ import {
   WeeklySchedule,
   conflictData,
 } from "@/types/globalTypes";
-import { ChevronDownIcon } from "lucide-react";
+import { ArrowRightIcon, ChevronDownIcon } from "lucide-react";
 import { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import { sessionTypeInfos, timeSlotsNameIcon, weekdays } from "../Constants";
@@ -16,6 +16,7 @@ import Skeleton from "react-loading-skeleton";
 import ConflictEnrollingWindow from "./ConflictEnrollingWindow";
 import EnrollmentConfirm from "./EnrollementConfirm";
 import SeatsNotAvailable from "./SeatsNotAvailable";
+import AuthRequirementBox from "./AuthRequirementBox";
 
 interface Props {
   course?: CourseById;
@@ -457,7 +458,8 @@ export default function EnrollWindow({ course, session }: Props) {
       </div>
 
       {/* Authentication Required if* or Complete Your Profile */}
-      <div></div>
+      {!session ? <AuthRequirementBox type="auth" /> : <AuthRequirementBox session={session} /> }
+      
 
       {/* Conflict Modal */}
       {conflictWindowOpen && (

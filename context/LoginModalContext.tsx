@@ -7,19 +7,30 @@ interface LoginModalContextType {
   openLogin: () => void;
   closeLogin: () => void;
   setLoginOpen: (value: boolean) => void;
+  isProfileOpen: boolean;
+  openProfile: () => void;
+  closeProfile: () => void;
+  setProfileOpen: (value: boolean) => void;
+
 }
 
 const LoginModalContext = createContext<LoginModalContextType | undefined>(undefined);
 
 export const LoginModalProvider = ({ children }: { children: ReactNode }) => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
 
   const openLogin = () => setIsLoginOpen(true);
   const closeLogin = () => setIsLoginOpen(false);
   const setLoginOpen = (value: boolean) => setIsLoginOpen(value);
+  
+  const openProfile = () => setIsProfileOpen(true);
+  const closeProfile = () => setIsProfileOpen(false);
+  const setProfileOpen = (value: boolean) => setIsProfileOpen(value);
 
   return (
-    <LoginModalContext.Provider value={{ isLoginOpen, openLogin, closeLogin, setLoginOpen }}>
+    <LoginModalContext.Provider value={{ isLoginOpen, isProfileOpen, openLogin, closeLogin, setLoginOpen, openProfile, closeProfile, setProfileOpen
+     }}>
       {children}
     </LoginModalContext.Provider>
   );

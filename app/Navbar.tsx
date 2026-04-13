@@ -19,12 +19,11 @@ import { useEnrolledCourses } from "@/context/EnrolledCoursesContext";
 export default function Navbar() {
   const { data: session, status } = useSession();
 
-  const { isLoginOpen, setLoginOpen } = useLogin();
+  const { isLoginOpen, setLoginOpen, isProfileOpen, setProfileOpen } = useLogin();
   const { isEnrolledCoursesOpen, setEnrolledCoursesOpen } =
     useEnrolledCourses();
 
   const [signUpOpen, setSignUpOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User>();
 
@@ -115,7 +114,7 @@ export default function Navbar() {
       )}
 
       {/* Profile */}
-      {profileOpen && (
+      {isProfileOpen && (
         <ProfileWindow setProfileOpen={setProfileOpen} user={user} />
       )}
 
