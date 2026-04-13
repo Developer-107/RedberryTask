@@ -2,6 +2,7 @@ import { CourseById } from '@/types/globalTypes'
 import EnrolledWindow from './EnrolledWindow';
 import CompletedRetakeWindow from './CompletedRetakeWindow';
 import { Session } from 'next-auth';
+import EnrollWindow from './EnrollWindow';
 
 interface Props {
     course?: CourseById,
@@ -15,7 +16,9 @@ export default function EnrollmentWindow( { course, session } : Props ) {
     <div className='mt-21 pl-33.25 col-span-2'>
 
       {/* Enrolled */}
-      { course?.enrollment && ( course?.enrollment?.completedAt ? <CompletedRetakeWindow courseInProgress={course} session={session ? session : undefined} /> : <EnrolledWindow courseInProgress={course} session={session ? session : undefined}/>) }
+      { course?.enrollment ?
+       ( course?.enrollment?.completedAt ? <CompletedRetakeWindow courseInProgress={course} session={session ? session : undefined} /> : <EnrolledWindow courseInProgress={course} session={session ? session : undefined}/>) 
+       : <EnrollWindow course={course} session={session}/> }
 
     </div>
   )

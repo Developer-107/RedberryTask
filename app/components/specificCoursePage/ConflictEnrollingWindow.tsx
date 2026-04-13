@@ -9,10 +9,11 @@ interface Props {
   conflictedWindowOpen?: (type: boolean) => void;
   successfullyEnrolledWindowOpen?: (type: boolean) => void;
   courseInProgress?: CourseById;
+  courseScheduleId?: number;
   session?: Session;
 }
 
-export default function EnrollmentConflict({ courseInProgress, session, conflictedCourseTitle, conflictedCourseTimeSchedule, conflictedWindowOpen, successfullyEnrolledWindowOpen }: Props) {
+export default function EnrollmentConflict({ courseInProgress, courseScheduleId, session, conflictedCourseTitle, conflictedCourseTimeSchedule, conflictedWindowOpen, successfullyEnrolledWindowOpen }: Props) {
   const router = useRouter();
 
     const continueEnrollment = async () => {
@@ -23,8 +24,7 @@ export default function EnrollmentConflict({ courseInProgress, session, conflict
         `/enrollments`,
         {
           courseId: courseInProgress?.id,
-          courseScheduleId:
-          courseInProgress.enrollment?.schedule?.sessionType?.courseScheduleId,
+          courseScheduleId,
           force: true,
         },
         {
@@ -75,7 +75,7 @@ export default function EnrollmentConflict({ courseInProgress, session, conflict
           </svg>
 
           <h1 className="font-medium text-[32px]">Enrollment Conflict</h1>
-          <p>
+          <p className="flex flex-col items-center">
             You are already enrolled in{" "}
             <span className="font-medium">"{conflictedCourseTitle}"</span> with the same schedule:
             <span> {conflictedCourseTimeSchedule}</span>

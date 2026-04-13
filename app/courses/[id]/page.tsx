@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 export default function page() {
   const { id } = useParams();
-    const { data: session, status } = useSession();
+  const { data: session, status } = useSession();
   const [initialLoading, setInitialLoading] = useState(true);
   const [course, setCourse] = useState<CourseById>();
   const [refreshKey, setRefreshKey] = useState(0);
@@ -23,12 +23,16 @@ export default function page() {
       try {
         setInitialLoading(true);
 
-            const res = await api.get(`/courses/${id}`, session ? {
+        const res = await api.get(
+          `/courses/${id}`,
+          session
+            ? {
                 headers: {
-            Authorization: `Bearer ${(session as any).accessToken}`,
-          },
-            } : {})
-
+                  Authorization: `Bearer ${(session as any).accessToken}`,
+                },
+              }
+            : {},
+        );
 
         setCourse(res.data.data);
       } catch (err) {
@@ -40,7 +44,6 @@ export default function page() {
 
     fetchCourse();
   }, [id, session, refreshKey]);
-
 
   return (
     <div className="flex flex-col mt-[69.5px] gap-8.5">
@@ -55,14 +58,17 @@ export default function page() {
 
       <div className="grid grid-cols-5">
         {/* Course Info */}
-        {initialLoading ? 
-        <CourseInfoSkeleton />
-        :
-        <CourseInfo course={course} />}
+        {initialLoading ? (
+          <CourseInfoSkeleton />
+        ) : (
+          <CourseInfo course={course} />
+        )}
 
         {/* Enrollment Window */}
-        <EnrollmentWindow course={course} session={ session ? session : undefined }  />
-
+        <EnrollmentWindow
+          course={course}
+          session={session ? session : undefined}
+        />
       </div>
     </div>
   );

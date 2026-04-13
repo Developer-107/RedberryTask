@@ -33,7 +33,7 @@ export default function CompletedRetakeWindow({
         {
           courseId: courseInProgress.id,
           courseScheduleId:
-            courseInProgress.enrollment?.schedule?.sessionType?.id,
+            courseInProgress?.enrollment?.schedule?.sessionType?.id,
           force: false,
         },
         {
@@ -53,9 +53,7 @@ export default function CompletedRetakeWindow({
         } else {
           const conflicts = err.response.data.conflicts;
 
-          console.log(conflicts);
-
-          setConflictData(conflicts);
+          setConflictData(conflicts[0]);
           setConflictWindowOpen(true);
         }
       } else {
@@ -234,6 +232,7 @@ export default function CompletedRetakeWindow({
           conflictedWindowOpen={setConflictWindowOpen}
           successfullyEnrolledWindowOpen={setSuccessfullyEnrolledWindowOpen}
           session={session}
+          courseScheduleId={courseInProgress?.enrollment?.schedule?.sessionType?.id}
           courseInProgress={courseInProgress}
         />
       )}

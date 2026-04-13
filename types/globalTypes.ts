@@ -101,7 +101,7 @@ export interface CourseById {
   image: string;
   basePrice: number;
   durationWeeks: number;
-  hours:string;
+  hours: string;
   isFeatured: boolean;
   reviews: [
     {
@@ -182,9 +182,31 @@ export interface CourseById {
   };
 }
 
-export interface conflictData{
+export interface conflictData {
   schedule?: string;
   conflictingCourseName: string;
+}
+
+export interface WeeklySchedule {
+  id: number;
+  label: string;
+  days: [string, string];
+}
+
+export interface TimeSlot {
+  id: number;
+  label: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface SessionType {
+  id: number;
+  courseScheduleId: number;
+  name: string;
+  priceModifier: number;
+  availableSeats: number;
+  location: string;
 }
 
 export type Filters = {
