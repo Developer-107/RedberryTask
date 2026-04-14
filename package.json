@@ -5,9 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "prisma migrate deploy && next start",
-    "lint": "eslint",
-    "postinstall": "prisma generate"
+    "start": "next start",
+    "lint": "eslint"
   },
   "dependencies": {
     "@radix-ui/themes": "^3.2.1",
