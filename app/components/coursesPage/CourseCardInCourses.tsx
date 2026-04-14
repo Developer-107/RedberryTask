@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Course } from "@/types/globalTypes";
+import { categoryIcons } from "../Constants";
 
 interface CourseProps {
   course: Course;
@@ -54,9 +55,10 @@ export default function CourseCardInCourses({ course }: CourseProps) {
               : course.title.slice(0, 54) + "..."}
           </p>
           <div className=" self-start text-gray-500 mt-3 mb-4">
-            <div className={`flex gap-1 h-full rounded-lg p-1 px-3 bg-gray-50`}>
-              <div className=" flex items-center text-gray-600 justify-center">
-                <p>{course?.category.name}</p>
+            <div className={`flex gap-1 h-full rounded-lg p-2 px-3 bg-gray-50`}>
+              <div className=" flex items-center text-gray-600 justify-center gap-2.5">
+                {categoryIcons.find(i => i.name === course?.category?.name)?.icon || ""}
+                <p>{course?.category?.name}</p>
               </div>
             </div>
           </div>

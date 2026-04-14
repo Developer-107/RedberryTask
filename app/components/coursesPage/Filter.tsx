@@ -6,6 +6,7 @@ import { XIcon } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import FilteringItemsSkeleton from "./FilteringItemsSkeleton";
+import { categoryIcons } from "../Constants";
 
 export default function Filter({
   onChange,
@@ -123,7 +124,8 @@ export default function Filter({
           : "bg-gray-50 "
       }`}
                   >
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-center gap-2.5">
+                      {categoryIcons.find(i => i.name === category.name)?.icon || ""}
                       <p>{category.name}</p>
                     </div>
                   </div>

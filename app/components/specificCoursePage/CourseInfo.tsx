@@ -1,5 +1,6 @@
 import { CourseById } from '@/types/globalTypes'
 import Image from "next/image";
+import { categoryIcons } from '../Constants';
 
 interface Props {
     course?: CourseById
@@ -89,10 +90,11 @@ export default function courseInfo( { course } : Props ) {
                   )}
 
                   <div
-                    className={`flex gap-1 h-full rounded-lg p-1 px-3 bg-gray-50`}
+                    className={`flex gap-1 h-full rounded-lg p-2 px-3 bg-gray-50`}
                   >
-                    <div className=" flex items-center text-gray-600 justify-center">
-                      <p>{course?.category.name}</p>
+                    <div className=" flex items-center text-gray-600 justify-center gap-2.5">
+                      {categoryIcons.find(i => i.name === course?.category?.name)?.icon || ""}
+                      <p>{course?.category?.name}</p>
                     </div>
                   </div>
                 </div>
