@@ -26,7 +26,7 @@ export default function CardInEnrolledCourses({
           </div>
           <div className="flex flex-col gap-1 h-full">
             <div className="flex gap-1 items-center justify-between text-sm font-medium">
-              <p className=" text-gray-700 font-normal text-xs">
+              <p className=" text-gray-700 font-normal text-sm">
                 <span className="text-gray-500">Lecturer</span>{" "}
                 {courseInProgress?.course?.instructor?.name}
               </p>
@@ -51,7 +51,7 @@ export default function CardInEnrolledCourses({
               )}
             </div>
 
-            <p className="mt-1 h-14 font-semibold text-gray-900 text-[20px]">
+            <p className="mb-1 h-14 font-semibold text-gray-900 text-[20px]">
               {courseInProgress?.course?.title}
             </p>
 

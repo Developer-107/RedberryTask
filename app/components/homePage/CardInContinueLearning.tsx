@@ -9,7 +9,7 @@ interface CourseInProgressProps {
 export default function CardInContinueLearning({ courseInProgress }: CourseInProgressProps) {
   return (
     <div
-      className="w-131.75 p-5 border border-gray-100 bg-white rounded-lg"
+      className="w-full p-5 border border-gray-100 bg-white rounded-lg"
               >
                 <div className="flex flex-col gap-5">
                   <div className="flex gap-3 h-full">
@@ -23,7 +23,7 @@ export default function CardInContinueLearning({ courseInProgress }: CourseInPro
                     </div>
                     <div className="flex flex-col gap-1 h-full w-full">
                       <div className="flex gap-1 items-center justify-between text-sm font-medium">
-                        <p className=" text-gray-700 font-normal text-xs">
+                        <p className=" text-gray-700 font-normal text-sm">
                           <span className="text-gray-500">Lecturer</span> {courseInProgress?.course?.instructor?.name}
                         </p>
                        {courseInProgress?.course?.avgRating && <p className="flex gap-1 items-center text-gray-600">

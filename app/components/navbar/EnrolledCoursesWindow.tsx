@@ -61,7 +61,7 @@ export default function EnrolledCoursesWindow({ user }: Props) {
           <p>Total Enrollments {coursesInProgress?.length || 0}</p>
         </div>
 
-        <div className="flex flex-col h-full mt-9.25 px-[18.5px] gap-3 overflow-y-scroll">
+        <div className="flex flex-col h-full mt-9.25 pb-30 px-[18.5px] gap-3 overflow-y-scroll overflow-x-hidden">
           {loading ? (
             [...Array(4)].map((_, idx) => (
               <ContinueLearningCardSkeleton key={idx} />

@@ -20,7 +20,7 @@ export default function CourseCard({ course }: CourseProps) {
         </div>
         <div className="flex flex-col gap-1 h-full">
           <div className="flex gap-1 items-center justify-between text-sm font-medium">
-            <p className=" text-gray-700 font-normal text-xs">
+            <p className=" text-gray-700 font-normal text-sm">
               <span className="text-gray-500">Lecturer</span>{" "}
               {course?.instructor?.name?.length < 50
                 ? course?.instructor?.name
