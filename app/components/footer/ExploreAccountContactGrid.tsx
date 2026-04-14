@@ -1,20 +1,27 @@
+'use client'
+
+import { useEnrolledCourses } from '@/context/EnrolledCoursesContext'
+import { useLogin } from '@/context/LoginModalContext'
 import Link from 'next/link'
 
 export default function ExploreAccountContactGrid() {
+  const { setProfileOpen } = useLogin();
+  const { setEnrolledCoursesOpen } = useEnrolledCourses();
+
   return (
     <div className="grid grid-cols-3">
           <div className="flex flex-col gap-3">
             <p className="text-[#130E67] font-semibold">Explore</p>
             <div className="flex flex-col gap-2">
-              <Link href={""}>Enrolled Courses</Link>
-              <Link href={""}>Browse Courses</Link>
+              <div onClick={() => setEnrolledCoursesOpen(true)} className='hover:text-[#4f47e6] cursor-pointer'>Enrolled Courses</div>
+              <Link href={"/courses"} className='hover:text-[#4f47e6]'>Browse Courses</Link>
             </div>
           </div>
 
           <div className="flex flex-col gap-3">
             <p className="text-[#130E67] font-semibold">Account</p>
             <div className="flex flex-col">
-              <Link href={""}>My Profile</Link>
+              <div onClick={() => setProfileOpen(true)} className='hover:text-[#4f47e6] cursor-pointer'>My Profile</div>
             </div>
           </div>
 
