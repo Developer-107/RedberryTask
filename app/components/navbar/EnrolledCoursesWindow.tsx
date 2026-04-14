@@ -37,8 +37,6 @@ export default function EnrolledCoursesWindow({ user }: Props) {
           },
         });
         setCoursesInProgress(res.data.data);
-
-        console.log(res);
       } catch (err) {
         console.error("CourseInProgress can't be fetched " + err);
       } finally {

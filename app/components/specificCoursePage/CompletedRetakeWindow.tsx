@@ -74,7 +74,6 @@ export default function CompletedRetakeWindow({
 
       setSuccessfullyEnrolledWindowOpen(true);
     } catch (err: any) {
-      console.log("FULL ERROR:", err);
       if (err.response?.status === 409) {
         if (
           err.response.data.message === "No seats available for this schedule."
@@ -82,8 +81,6 @@ export default function CompletedRetakeWindow({
           setSeatsNotAvailableWindowOpen(true);
         } else {
           const conflicts = err.response.data.conflicts;
-
-          console.log(conflicts);
 
           setConflictData(conflicts?.[0]);
           setConflictWindowOpen(true);

@@ -143,8 +143,7 @@ export default function ProfileWindow({ setProfileOpen, user }: Props) {
 
       const { user } = res.data.data;
 
-      console.log("Updated:", user);
-      router.push("/")
+      router.push("/");
       setProfileOpen(false);
     } catch (err: any) {
       if (err.response) {

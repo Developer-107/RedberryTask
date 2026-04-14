@@ -22,7 +22,7 @@ export default function ContinueLearning() {
   >([]);
 
   useEffect(() => {
-    if(!session) return;
+    if (!session) return;
 
     const fetchCoursesInProgress = async () => {
       try {
@@ -33,8 +33,6 @@ export default function ContinueLearning() {
           },
         });
         setCoursesInProgress(res.data.data);
-
-        console.log(res);
       } catch (err) {
         console.error("CourseInProgress can't be fetched " + err);
       } finally {
@@ -45,29 +43,40 @@ export default function ContinueLearning() {
   }, [session]);
 
   return (
-    <div className={`flex flex-col mb-16  ${coursesInProgress?.length <= 0 && session && "hidden"}`}>
+    <div
+      className={`flex flex-col mb-16  ${coursesInProgress?.length <= 0 && session && "hidden"}`}
+    >
       <h2 className="font-semibold text-[40px]">Continue Learning</h2>
       <div className="flex items-center justify-between">
         <p className="text-[18px]">Pick up where u left</p>
-        <div onClick={() => session ? setEnrolledCoursesOpen(true) : setLoginOpen(true)} className="cursor-pointer hover:opacity-80 underline text-[#4F46E5]">
+        <div
+          onClick={() =>
+            session ? setEnrolledCoursesOpen(true) : setLoginOpen(true)
+          }
+          className="cursor-pointer hover:opacity-80 underline text-[#4F46E5]"
+        >
           See all
         </div>
       </div>
       <br />
 
       <div className="flex flex-row gap-5">
-        {(loading && status === "loading")
-          ? [...Array(3)].map((_, idx) => <ContinueLearningCardSkeleton key={idx} />)
-          :
-          !session ?
+        {loading && status === "loading" ? (
+          [...Array(3)].map((_, idx) => (
+            <ContinueLearningCardSkeleton key={idx} />
+          ))
+        ) : !session ? (
           <MockContinueLearning />
-          : 
-          coursesInProgress?.slice(0, 3).map((courseInProgress) => (
+        ) : (
+          coursesInProgress
+            ?.slice(0, 3)
+            .map((courseInProgress) => (
               <CardInContinueLearning
                 key={courseInProgress.id}
                 courseInProgress={courseInProgress}
               />
-            ))}
+            ))
+        )}
       </div>
     </div>
   );

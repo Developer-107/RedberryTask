@@ -94,8 +94,6 @@ export default function SignUpForm({ setLoginOpen, setSignUpOpen }: Props) {
 
       const { user, token } = res.data.data;
 
-      console.log("Registered:", user);
-
       await signIn("credentials", {
         email,
         password,
