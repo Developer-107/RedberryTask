@@ -1,48 +1,22 @@
 import { useLogin } from '@/context/LoginModalContext';
-import { api } from '@/lib/api';
 import { User } from '@/types/globalTypes';
 import { ArrowRightIcon } from 'lucide-react'
-import { Session } from 'next-auth';
-import { useEffect, useState } from 'react';
 
 interface Props {
     session?: any,
-    type?: string
+    type?: string,
+    user?: User
 }
 
-export default function AuthRequirementBox( { type, session } : Props) {
+export default function AuthRequirementBox( { type, session, user } : Props) {
     const { setLoginOpen, setProfileOpen, isProfileOpen } = useLogin();
-    const [ loading, setLoading ] = useState(true)
-    const [ user, setUser ] = useState<User>()
 
-    useEffect(() => {
-  if (type === "auth") return;
+  if (type !== "auth" && !user) return null;
 
-  if (!session?.accessToken) return;
-
-  const fetchUser = async () => {
-    try {
-      setLoading(true);
-
-      const res = await api.get("/me", {
-        headers: {
-          Authorization: `Bearer ${session.accessToken}`,
-        },
-      });
-
-      setUser(res.data.data ?? {});
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchUser();
-}, [type, session?.accessToken, isProfileOpen]);
+  if (type !== "auth" && user?.profileComplete) return null;
 
   return (
-    <div className={`flex items-center justify-center gap-7 p-5 bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl ${type === "auth" ? "flex" : user?.profileComplete ? "hidden" : "flex"}`}>
+    <div className={`flex items-center justify-center gap-7 p-5 bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl`}>
             <div className="flex flex-col gap-2 justify-center">
               <p className="flex items-center gap-2 text-gray-800 font-medium">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">

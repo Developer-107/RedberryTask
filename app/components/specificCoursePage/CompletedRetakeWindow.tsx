@@ -1,5 +1,5 @@
 import { api } from "@/lib/api";
-import { conflictData, CourseById } from "@/types/globalTypes";
+import { conflictData, CourseById, SessionType } from "@/types/globalTypes";
 import { useState } from "react";
 import RatingStars from "./RatingStars";
 import { Session } from "next-auth";
@@ -24,16 +24,45 @@ export default function CompletedRetakeWindow({
     useState(false);
   const [conflictData, setConflictData] = useState<conflictData>();
 
+  const [scheduleId, setScheduleId] = useState<number | undefined>();
+
   const retakeCourse = async () => {
     try {
       if (!courseInProgress || !session) return;
 
+      // Deletes enrollment
+      await api.delete(`/enrollments/${courseInProgress?.enrollment?.id}`, {
+        headers: {
+          Authorization: `Bearer ${(session as any).accessToken}`,
+        },
+      });
+
+      // Fetches Schedule Id
+      const resForScheduleId = await api.get(
+        `/courses/${courseInProgress?.id}/session-types`,
+        {
+          params: {
+            weekly_schedule_id:
+              courseInProgress?.enrollment?.schedule?.weeklySchedule?.id,
+            time_slot_id: courseInProgress?.enrollment?.schedule?.timeSlot?.id,
+          },
+        },
+      );
+
+      const sessionType = resForScheduleId.data.data.find(
+        (sessionType: SessionType) =>
+          sessionType.id ===
+          courseInProgress?.enrollment?.schedule?.sessionType?.id,
+      );
+
+      setScheduleId(sessionType?.courseScheduleId);
+
+      //  Posts Enrollment
       await api.post(
         `/enrollments`,
         {
           courseId: courseInProgress.id,
-          courseScheduleId:
-            courseInProgress?.enrollment?.schedule?.sessionType?.id,
+          courseScheduleId: sessionType?.courseScheduleId,
           force: false,
         },
         {
@@ -45,6 +74,7 @@ export default function CompletedRetakeWindow({
 
       setSuccessfullyEnrolledWindowOpen(true);
     } catch (err: any) {
+      console.log("FULL ERROR:", err);
       if (err.response?.status === 409) {
         if (
           err.response.data.message === "No seats available for this schedule."
@@ -53,7 +83,9 @@ export default function CompletedRetakeWindow({
         } else {
           const conflicts = err.response.data.conflicts;
 
-          setConflictData(conflicts[0]);
+          console.log(conflicts);
+
+          setConflictData(conflicts?.[0]);
           setConflictWindowOpen(true);
         }
       } else {
@@ -218,7 +250,11 @@ export default function CompletedRetakeWindow({
             </p>
 
             {!courseInProgress?.isRated && (
-              <RatingStars courseId={courseInProgress?.id} />
+              <RatingStars
+                setRateWindowOpen={setRateWindowOpen}
+                courseId={courseInProgress?.id}
+                session={session}
+              />
             )}
           </div>
         </div>
@@ -232,7 +268,7 @@ export default function CompletedRetakeWindow({
           conflictedWindowOpen={setConflictWindowOpen}
           successfullyEnrolledWindowOpen={setSuccessfullyEnrolledWindowOpen}
           session={session}
-          courseScheduleId={courseInProgress?.enrollment?.schedule?.sessionType?.id}
+          courseScheduleId={scheduleId}
           courseInProgress={courseInProgress}
         />
       )}

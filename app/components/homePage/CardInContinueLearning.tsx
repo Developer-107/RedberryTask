@@ -60,7 +60,7 @@ export default function CardInContinueLearning({ courseInProgress }: CourseInPro
                         />
                       </div>
                     </div>
-                    <Link href={"/"} className="px-5 py-3 hover:opacity-80 font-medium text-[#4F46E5] bg-white border-[1.5px] border-[#4F46E5] rounded-lg">
+                    <Link href={`/courses/${courseInProgress?.course?.id}`} className="px-5 py-3 hover:opacity-80 font-medium text-[#4F46E5] bg-white border-[1.5px] border-[#4F46E5] rounded-lg">
                       view
                     </Link>
                   </div>

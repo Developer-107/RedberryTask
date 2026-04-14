@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { CourseInProgress } from "@/types/globalTypes";
+import { useEnrolledCourses } from "@/context/EnrolledCoursesContext";
 
 interface CourseInProgressProps {
   courseInProgress: CourseInProgress;
@@ -9,6 +10,8 @@ interface CourseInProgressProps {
 export default function CardInEnrolledCourses({
   courseInProgress,
 }: CourseInProgressProps) {
+  const { setEnrolledCoursesOpen } = useEnrolledCourses()
+
   return (
     <div className="w-156.25 p-5 border border-gray-100 bg-white rounded-lg">
       <div className="flex flex-col gap-5">
@@ -150,7 +153,8 @@ export default function CardInEnrolledCourses({
             </div>
           </div>
           <Link
-            href={"/"}
+            href={`/courses/${courseInProgress?.course?.id}`}
+            onClick={() => setEnrolledCoursesOpen(false)}
             className="px-5 py-3 hover:opacity-80 font-medium text-[#4F46E5] bg-white border-[1.5px] border-[#4F46E5] rounded-lg"
           >
             view

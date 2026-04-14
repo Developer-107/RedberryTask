@@ -45,7 +45,7 @@ export default function EnrollmentConflict({ courseInProgress, courseScheduleId,
 
   return (
     <div className="fixed inset-0 flex h-screen items-center justify-center z-70 bg-[#000000]/25">
-      <div className="flex flex-col justify-center p-15 items-center gap-10 bg-white rounded-lg mb-[10vh]">
+      <div className="flex flex-col min-w-114  justify-center p-15 items-center gap-10 bg-white rounded-lg mb-[10vh]">
         <div className="flex flex-col gap-6 justify-center items-center text-gray-700">
           <svg
             width="94"
@@ -85,14 +85,14 @@ export default function EnrollmentConflict({ courseInProgress, courseScheduleId,
         <div className="w-full flex gap-2">
         <button
           onClick={continueEnrollment}
-          className="flex items-center justify-around p-4.25 rounded-lg bg-white border border-[#4F46E5] text-[#4F46E5] hover:opacity-80 w-full cursor-pointer"
+          className="flex items-center justify-around p-4.25 rounded-lg bg-white border border-[#4F46E5] text-[#4F46E5] hover:opacity-80 w-full cursor-pointer text-nowrap"
         >
           Continue Anyway
         </button>
 
         <button
           onClick={() => conflictedWindowOpen && conflictedWindowOpen(false)}
-          className="flex items-center justify-around p-4.25 rounded-lg bg-[#4F46E5] border border-[#4F46E5] text-white hover:opacity-80 w-full cursor-pointer"
+          className="flex items-center justify-around p-4.25 rounded-lg bg-[#4F46E5] border border-[#4F46E5] text-white hover:opacity-80 w-full cursor-pointer text-nowrap"
         >
           Cancel
         </button>

@@ -1,5 +1,6 @@
 "use client";
 
+import CourseEnrollmentWindowSkeleton from "@/app/components/specificCoursePage/CourseEnrollmentWindowSkeleton";
 import CourseInfo from "@/app/components/specificCoursePage/CourseInfo";
 import CourseInfoSkeleton from "@/app/components/specificCoursePage/CourseInfoSkeleton";
 import EnrollmentWindow from "@/app/components/specificCoursePage/EnrollmentWindow";
@@ -65,10 +66,13 @@ export default function page() {
         )}
 
         {/* Enrollment Window */}
+        {initialLoading ? (
+          <CourseEnrollmentWindowSkeleton />
+        ) :
         <EnrollmentWindow
           course={course}
           session={session ? session : undefined}
-        />
+        />}
       </div>
     </div>
   );

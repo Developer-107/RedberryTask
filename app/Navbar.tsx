@@ -15,6 +15,7 @@ import { User } from "@/types/globalTypes";
 import { useLogin } from "@/context/LoginModalContext";
 import EnrolledCoursesWindow from "./components/navbar/EnrolledCoursesWindow";
 import { useEnrolledCourses } from "@/context/EnrolledCoursesContext";
+import Link from "next/link";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
@@ -52,7 +53,9 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 z-50 bg-[#F5F5F5] flex w-full justify-between h-27 items-center py-6 px-44.25 border-b border-b-gray-200">
+      <Link href={"/"}>
       <Logo contentSize={30} />
+      </Link>
 
       <div className="flex items-center gap-5 ">
         <BrowseCourse />

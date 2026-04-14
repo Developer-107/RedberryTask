@@ -5,10 +5,11 @@ import {
   CourseById,
   SessionType,
   TimeSlot,
+  User,
   WeeklySchedule,
   conflictData,
 } from "@/types/globalTypes";
-import { ArrowRightIcon, ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react";
 import { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import { sessionTypeInfos, timeSlotsNameIcon, weekdays } from "../Constants";
@@ -17,6 +18,7 @@ import ConflictEnrollingWindow from "./ConflictEnrollingWindow";
 import EnrollmentConfirm from "./EnrollementConfirm";
 import SeatsNotAvailable from "./SeatsNotAvailable";
 import AuthRequirementBox from "./AuthRequirementBox";
+import CompleteProfileWindow from "./CompleteProfileWindow";
 
 interface Props {
   course?: CourseById;
@@ -54,6 +56,11 @@ export default function EnrollWindow({ course, session }: Props) {
   const [seatsNotAvailableWindowOpen, setSeatsNotAvailableWindowOpen] =
     useState(false);
   const [conflictData, setConflictData] = useState<conflictData>();
+
+  const [user, setUser] = useState<User>();
+  const [loading, setLoading] = useState(true);
+  const [completeProfileWindowOpen, setCompleteProfileWindowOpen] =
+    useState(false);
 
   //   Fetching Schedule
   useEffect(() => {
@@ -123,9 +130,38 @@ export default function EnrollWindow({ course, session }: Props) {
     fetchSessionTypes();
   }, [chosenScheduleId, chosenTimeSlotId]);
 
+  // Fetching User Info
+  useEffect(() => {
+    if (!session) return;
+
+    const fetchUser = async () => {
+      try {
+        setLoading(true);
+
+        const res = await api.get("/me", {
+          headers: {
+            Authorization: `Bearer ${(session as any)?.accessToken}`,
+          },
+        });
+
+        setUser(res.data.data ?? {});
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [session]);
+
   const enroll = async () => {
     try {
-      if (!course || !session) return;
+      if (!course || !session || !user) return;
+      if (!user.profileComplete) {
+        setCompleteProfileWindowOpen(true);
+        return;
+      }
 
       await api.post(
         `/enrollments`,
@@ -449,7 +485,7 @@ export default function EnrollWindow({ course, session }: Props) {
             <button
               onClick={enroll}
               className="flex items-center justify-around p-4.25 rounded-lg bg-[#4F46E5] disabled:text-[#B7B3F4] disabled:bg-[#EEEDFC] text-white not-disabled:hover:opacity-80 w-full font-medium not-disabled:cursor-pointer text-[20px]"
-              disabled={!chosenSessionId}
+              disabled={!chosenSessionId || !session || loading}
             >
               Enroll Now
             </button>
@@ -458,8 +494,18 @@ export default function EnrollWindow({ course, session }: Props) {
       </div>
 
       {/* Authentication Required if* or Complete Your Profile */}
-      {!session ? <AuthRequirementBox type="auth" /> : <AuthRequirementBox session={session} /> }
-      
+      {!session ? (
+        <AuthRequirementBox type="auth" />
+      ) : (
+        <AuthRequirementBox session={session} user={user} />
+      )}
+
+      {/* Completing profile Required Modal */}
+      {completeProfileWindowOpen && (
+        <CompleteProfileWindow
+          setCompleteProfileWindowOpen={setCompleteProfileWindowOpen}
+        />
+      )}
 
       {/* Conflict Modal */}
       {conflictWindowOpen && (

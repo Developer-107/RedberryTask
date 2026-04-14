@@ -32,21 +32,21 @@ export default function Carousel() {
       desc: "Explore a wide range of expert-led courses in design, development, business, and more. Find the skills you need to grow your career and learn at your own pace.",
       buttonName: "Browse Courses",
       image: "/carousel-imgs/carousel1.png",
-      href: "",
+      href: "/courses",
     },
     {
       title: "Pick up where you left off",
       desc: "Your learning journey is already in progress. Continue your enrolled courses, track your progress, and stay on track toward completing your goals.",
       buttonName: "Start Learning",
       image: "/carousel-imgs/carousel2.png",
-      href: "",
+      href: "/courses",
     },
     {
       title: "Learng togehter, grow faster",
       desc: "",
       buttonName: "Learn More",
       image: "/carousel-imgs/carousel3.png",
-      href: "",
+      href: "/courses",
     },
   ];
 

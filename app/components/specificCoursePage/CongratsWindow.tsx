@@ -1,12 +1,14 @@
 import { useRouter } from "next/navigation";
 import RatingStars from "./RatingStars";
+import { Session } from "next-auth";
 
 interface Props {
   courseTitle?: string;
   courseId?: number;
+  session?: Session;
 }
 
-export default function CongratsWindow({ courseTitle, courseId }: Props) {
+export default function CongratsWindow({ courseTitle, courseId, session }: Props) {
   const router = useRouter();
 
   return (
@@ -45,7 +47,7 @@ export default function CongratsWindow({ courseTitle, courseId }: Props) {
         <div className="flex flex-col gap-4.5 justify-center items-center mt-3 mb-10">
           <p className="text-[#736BEA]">Rate your Experience</p>
 
-          <RatingStars courseId={courseId} />
+          <RatingStars courseId={courseId} session={session} />
         </div>
 
         <button

@@ -189,7 +189,7 @@ export default function EnrolledWindow({ courseInProgress, session }: Props) {
       </div>
 
       {/* Congrats Modal Window */}
-            { isCongratsWindowOpen && <CongratsWindow courseId={courseInProgress?.id} courseTitle={courseInProgress?.title} />}
+            { isCongratsWindowOpen && <CongratsWindow courseId={courseInProgress?.id} courseTitle={courseInProgress?.title} session={session} />}
     </div>
 
   );
