@@ -20,11 +20,11 @@ export default function CourseCardInCourses({ course }: CourseProps) {
         </div>
         <div className="flex flex-col gap-1 h-full">
           <div className="flex gap-1 items-center justify-between text-sm font-medium">
-            <p className=" text-gray-300 font-normal text-xs">
+            <p className="text-gray-300 font-medium text-sm">
               {course?.instructor?.name?.length < 50
                 ? course?.instructor?.name
                 : course?.instructor?.name.slice(0, 47) + "..."}
-                <span> | {course?.durationWeeks} Weeks</span>{" "}
+              <span> | {course?.durationWeeks} Weeks</span>{" "}
             </p>
 
             {course?.avgRating && (
@@ -54,13 +54,11 @@ export default function CourseCardInCourses({ course }: CourseProps) {
               : course.title.slice(0, 54) + "..."}
           </p>
           <div className=" self-start text-gray-500 mt-3 mb-4">
-              <div
-                className={`flex gap-1 h-full rounded-lg p-1 px-3 bg-gray-50`}
-              >
-                <div className=" flex items-center text-gray-600 justify-center">
-                  <p>{course?.category.name}</p>
-                </div>
+            <div className={`flex gap-1 h-full rounded-lg p-1 px-3 bg-gray-50`}>
+              <div className=" flex items-center text-gray-600 justify-center">
+                <p>{course?.category.name}</p>
               </div>
+            </div>
           </div>
           <div className="flex justify-between items-center text-gray-400 font-normal mt-auto">
             <div className="flex flex-col text-xs">

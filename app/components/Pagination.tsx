@@ -67,7 +67,7 @@ export default function Pagination({
             <button
               key={i}
               onClick={() => onPageChange(Number(p))}
-              className={`px-4 py-2 rounded-lg border cursor-pointer h-10 w-10 hover:border-[#DDDBFA] hover:bg-[#DDDBFA]
+              className={`flex items-center justify-center rounded-lg border cursor-pointer h-10 w-10 hover:border-[#DDDBFA] hover:bg-[#DDDBFA]
               ${
                 page === p
                   ? "bg-[#4F46E5] text-white"

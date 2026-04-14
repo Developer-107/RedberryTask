@@ -27,7 +27,7 @@ interface Props {
 
 export default function EnrollWindow({ course, session }: Props) {
   const [isWeeklyScheduleWindowOpen, setIsWeeklyScheduleWindowOpen] =
-    useState(false);
+    useState(true);
   const [isTimeSlotWindowOpen, setIsTimeSlotWindowOpen] = useState(false);
   const [isSessionTypeWindowOpen, setIsSessionTypeWindowOpen] = useState(false);
 

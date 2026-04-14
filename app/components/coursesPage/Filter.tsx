@@ -85,14 +85,14 @@ export default function Filter({
   return (
     <div className="flex flex-col pr-22.5 gap-8">
       <div className="flex items-center justify-between">
-        <p className="text-[40px] text-gray-950 font-medium">Filters</p>
+        <p className="text-[40px] text-gray-950 font-semibold">Filters</p>
         <div
           onClick={() => {
             setSelectedCategories([]);
             setSelectedTopics([]);
             setSelectedInstructors([]);
           }}
-          className="flex items-center cursor-pointer text-gray-400 hover:text-[#4F46E5] gap-1"
+          className="flex items-center cursor-pointer font-medium text-gray-400 hover:text-[#4F46E5] gap-1"
         >
           <p>Clear all filters</p>
           <XIcon size={19} />

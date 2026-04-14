@@ -54,7 +54,15 @@ export default function page() {
     };
 
     fetchCourses();
-  }, [filters, page]);
+  }, [filters, page, sortBy]);
+
+  // Scrolls up on page
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // optional
+    });
+  }, [page]);
 
   const totalPages = Math.ceil(metaData.total / metaData.perPage) || 1;
 
@@ -87,7 +95,7 @@ export default function page() {
         <div className="col-span-3 flex flex-col gap-8">
           {/* Out of Sort By */}
           <div className="flex items-center h-15">
-            <div className="w-full flex justify-between items-center text-gray-500">
+            <div className="w-full flex justify-between items-center text-gray-500 font-medium">
               <p>
                 {metaData.total > 0
                   ? `Showing ${courses?.length || 0} out of ${metaData.total}`

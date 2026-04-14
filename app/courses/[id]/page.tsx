@@ -52,7 +52,7 @@ export default function page() {
       <div className="flex items-center gap-2 text-[18px] text-gray-500">
         <Link href="/">Home</Link>
         <ChevronRight size={17} />
-        <Link href="/Courses">Browse</Link>
+        <Link href="/courses">Browse</Link>
         <ChevronRight size={17} />
         <p className="text-[#736BEA]">Development</p>
       </div>
