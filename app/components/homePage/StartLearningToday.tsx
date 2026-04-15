@@ -28,10 +28,10 @@ export default function StartLearningToday() {
   return (
     <div className="flex flex-col mb-16">
       <h2 className="font-semibold text-[40px]">Start Learning Today</h2>
-      <p className="text-[18px]">
+      <p className="text-[18px] mb-8">
         Choose from our most popular courses and begin your journey
       </p>
-      <br />
+     
 
       <div className="flex flex-row justify-between gap-5">
         {loading

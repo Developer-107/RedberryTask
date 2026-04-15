@@ -94,7 +94,7 @@ export default function LogInForm({ setLoginOpen, setSignUpOpen }: Props) {
             )}
             <button
               type="submit"
-              className="flex mt-3 w-full h-10 text-[16px] rounded-lg bg-[#4F46E5] text-white py-6 justify-center items-center hover:opacity-80 transition cursor-pointer"
+              className="flex font-medium mt-3 w-full h-10 text-[16px] rounded-lg bg-[#4F46E5] text-white py-6 justify-center items-center hover:opacity-80 transition cursor-pointer"
             >
               Log In
             </button>

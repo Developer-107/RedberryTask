@@ -47,7 +47,7 @@ export default function page() {
   }, [id, session, refreshKey]);
 
   return (
-    <div className="flex flex-col mt-[69.5px] gap-8.5">
+    <div className="flex font-medium flex-col mt-[69.5px] gap-8.5">
       {/* Home > Browse */}
       <div className="flex items-center gap-2 text-[18px] text-gray-500">
         <Link href="/">Home</Link>

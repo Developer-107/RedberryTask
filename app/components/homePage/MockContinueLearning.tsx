@@ -104,7 +104,7 @@ export default function MockContinueLearning() {
             </p>
             <button
               onClick={openLogin}
-              className="px-5 py-2.5 mt-3 bg-[#4F46E5] text-white rounded-lg hover:opacity-80 cursor-pointer"
+              className="px-5 py-2.5 mt-3 font-medium bg-[#4F46E5] text-white rounded-lg hover:opacity-80 cursor-pointer"
             >
               {" "}
               Log in{" "}

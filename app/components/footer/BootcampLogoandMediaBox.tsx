@@ -95,7 +95,7 @@ export default function BootcampLogoandMediaBox() {
   ];
   
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-6">
       <div className="text-[#130E67]">
         <div className="flex gap-3 font-medium items-center">
           <Logo contentSize={19} />
@@ -107,7 +107,7 @@ export default function BootcampLogoandMediaBox() {
           Browse courses to get started.
         </span>
       </div>
-      <br />
+      
       <div className="flex items-center gap-5">
         {socialMedias.map((socialMedia) => (
           <a key={socialMedia.name} href={socialMedia.href} target="_blank">

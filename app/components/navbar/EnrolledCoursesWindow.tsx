@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import ContinueLearningCardSkeleton from "../homePage/ContinueLearningCardSkeleton";
 import CardInEnrolledCourses from "./CardInEnrolledCourses";
-import Link from "next/link";
 import EnrolledCoursesIfNotDiv from "./EnrolledCoursesIfNotDiv";
 
 interface Props {

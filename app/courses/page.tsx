@@ -69,7 +69,7 @@ export default function page() {
   return (
     <div className="flex flex-col mt-[69.5px] gap-8.5">
       {/* Home > Browse */}
-      <div className="flex items-center gap-2 text-[18px] text-gray-500">
+      <div className="flex font-medium items-center gap-2 text-[18px] text-gray-500">
         <Link href="/">Home</Link>
         <ChevronRight size={17} />
         <p className="text-[#736BEA]">Browse</p>
@@ -82,7 +82,7 @@ export default function page() {
           <Filter onChange={setFilters} />
           <div className="flex flex-col text-gray-500 gap-4  pr-22.5">
             <hr />
-            <p>
+            <p className="font-medium">
               {filters.categories.length +
                 filters.instructors.length +
                 filters.topics.length}{" "}

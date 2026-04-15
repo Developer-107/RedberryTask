@@ -29,7 +29,7 @@ export default function AuthRequirementBox( { type, session, user } : Props) {
             </div>
             <button 
             onClick={type === "auth" ? () => {setLoginOpen(true)} : () => {setProfileOpen(true)}}
-            className="flex items-center max-h-11.5 justify-center px-3 py-2.5 gap-1.5 rounded-xl border border-[#B7B3F4] bg-[#EEEDFC] text-[#281ED2] hover:opacity-80 cursor-pointer"> {type === "auth" ? "Sign In" : "Complete"} <ArrowRightIcon strokeWidth={1} size={19}/> </button>
+            className="flex font-medium items-center max-h-11.5 justify-center px-3 py-2.5 gap-1.5 rounded-xl border border-[#B7B3F4] bg-[#EEEDFC] text-[#281ED2] hover:opacity-80 cursor-pointer"> {type === "auth" ? "Sign In" : "Complete"} <ArrowRightIcon strokeWidth={1.5} size={19}/> </button>
           </div>
   )
 }

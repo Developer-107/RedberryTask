@@ -47,8 +47,8 @@ export default function ContinueLearning() {
       className={`flex flex-col mb-16  ${coursesInProgress?.length <= 0 && session && "hidden"}`}
     >
       <h2 className="font-semibold text-[40px]">Continue Learning</h2>
-      <div className="flex items-center justify-between">
-        <p className="text-[18px]">Pick up where u left</p>
+      <div className="flex items-center justify-between mb-8">
+        <p className="text-[18px]">Pick up where you left</p>
         <div
           onClick={() =>
             session ? setEnrolledCoursesOpen(true) : setLoginOpen(true)
@@ -58,7 +58,6 @@ export default function ContinueLearning() {
           See all
         </div>
       </div>
-      <br />
 
       <div className="flex flex-row gap-5">
         {loading && status === "loading" ? (

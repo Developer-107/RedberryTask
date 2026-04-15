@@ -67,7 +67,7 @@ export default function CourseCard({ course }: CourseProps) {
             </div>
             <Link
               href={`/courses/${course.id}`}
-              className="px-4 py-3 hover:opacity-80 bg-[#4F46E5] text-white rounded-lg"
+              className="px-4 py-3 font-medium hover:opacity-80 bg-[#4F46E5] text-white rounded-lg"
             >
               Details
             </Link>

@@ -101,7 +101,7 @@ export default function Filter({
       </div>
       <div className="w-full flex flex-col gap-14 text-gray-500">
         <div className="flex flex-col gap-6">
-          <p>Categories</p>
+          <p className="font-medium">Categories</p>
           <div className="flex gap-1 flex-wrap">
             {loading
               ? [...Array(5)].map((_, idx) => (
@@ -134,7 +134,7 @@ export default function Filter({
         </div>
 
         <div className="flex flex-col gap-6">
-          <p>Topics</p>
+          <p className="font-medium">Topics</p>
           <div className="flex gap-1 flex-wrap">
             {loadingTopics
               ? [...Array(17)].map((_, idx) => (
@@ -166,7 +166,7 @@ export default function Filter({
         </div>
 
         <div className="flex flex-col gap-6">
-          <p>Instructors</p>
+          <p className="font-medium">Instructors</p>
           <div className="flex gap-2 flex-col items-start">
             {loading
               ? [...Array(7)].map((_, idx) => (
